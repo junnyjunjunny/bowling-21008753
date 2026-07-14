@@ -31,3 +31,16 @@ def test_one_spare_adds_next_roll_as_bonus():
         game.roll(0)
 
     assert game.score() == 18
+
+
+def test_one_strike_adds_next_two_rolls_as_bonus():
+    game = Game()
+
+    game.roll(10)  # 1프레임: 스트라이크
+    game.roll(3)   # 2프레임 첫 투구
+    game.roll(4)   # 2프레임 두 번째 투구
+
+    for _ in range(16):  # 3~10프레임: 전부 거터
+        game.roll(0)
+
+    assert game.score() == 24

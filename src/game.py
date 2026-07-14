@@ -10,7 +10,15 @@ class Game:
         roll_index = 0
 
         for _ in range(10):
-            first, second = self.rolls[roll_index], self.rolls[roll_index + 1]
+            first = self.rolls[roll_index]
+
+            if first == 10:
+                bonus = self.rolls[roll_index + 1] + self.rolls[roll_index + 2]
+                total += 10 + bonus
+                roll_index += 1
+                continue
+
+            second = self.rolls[roll_index + 1]
 
             if first + second == 10:
                 bonus = self.rolls[roll_index + 2]
