@@ -53,3 +53,29 @@ def test_perfect_game_scores_three_hundred():
         game.roll(10)
 
     assert game.score() == 300
+
+
+def test_tenth_frame_spare_gets_one_bonus_roll():
+    game = Game()
+
+    for _ in range(18):  # 1~9프레임: 전부 거터
+        game.roll(0)
+
+    game.roll(5)
+    game.roll(5)  # 10프레임: 스페어
+    game.roll(1)  # 보너스 투구 1회
+
+    assert game.score() == 11
+
+
+def test_tenth_frame_strike_gets_two_bonus_rolls():
+    game = Game()
+
+    for _ in range(18):  # 1~9프레임: 전부 거터
+        game.roll(0)
+
+    game.roll(10)  # 10프레임: 스트라이크
+    game.roll(5)
+    game.roll(3)   # 보너스 투구 2회
+
+    assert game.score() == 18
